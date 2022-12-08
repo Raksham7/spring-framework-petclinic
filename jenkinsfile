@@ -6,9 +6,23 @@ pipeline {
                 git branch: 'main', credentialsId: 'Boxfuse', url: 'https://github.com/Raksham7/spring-framework-petclinic.git'
             }
         }
-        stage("UNIT Testing"){
+        stage('Integration Testing'){
             steps{
-                sh 'mvn test' 
+                sh 'mvn verify -DskipUnitTests'
+            }
+        }
+        stage('maven build'){
+            steps{
+                sh 'mvn clean install package'
+            }
+        }
+        stage('static code analysis'){
+            steps{
+              script{
+                  withSonarQubeEnv(credentialsId: 'sonar-api-key') {
+                     sh 'mvn clean package sonar:sonar'
+                  }
+              } 
             }
         }        
     }
