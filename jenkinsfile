@@ -6,11 +6,6 @@ pipeline {
                 git branch: 'main', credentialsId: 'Boxfuse', url: 'https://github.com/Raksham7/spring-framework-petclinic.git'
             }
         }
-        stage('Integration Testing'){
-            steps{
-                sh 'mvn verify -DskipUnitTests'
-            }
-        }
         stage('maven build'){
             steps{
                 sh 'mvn clean install package'
