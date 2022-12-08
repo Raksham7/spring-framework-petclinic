@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage("Build"){
             steps{
-                git credentialsId: 'Boxfuse', url: 'https://github.com/Raksham7/boxfuse.git'
+                git branch: 'main', credentialsId: 'Boxfuse', url: 'https://github.com/Raksham7/spring-framework-petclinic.git'
             }
         }
         stage("UNIT Testing"){
